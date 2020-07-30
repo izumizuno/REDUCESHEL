@@ -1,0 +1,4 @@
+#!/bin/csh
+source /jac_sw/bin/stardev.csh
+smurf
+kappa

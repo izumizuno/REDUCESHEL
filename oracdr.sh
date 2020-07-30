@@ -1,0 +1,8 @@
+#!/bin/csh
+source /jac_sw/bin/starlink.csh
+smurf
+kappa
+oracdr_acsis
+setenv ORAC_DATA_IN .
+ls a????????_?????_??_????.sdf>mylist
+oracdr -loop file -file mylist REDUCE_SCIENCE_CONTINUUM
