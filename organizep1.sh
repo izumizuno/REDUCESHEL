@@ -10,11 +10,16 @@ awk -f getfreq.awk mylist > getfreq.txt
 cat set_soft.txt getfreq.txt > getfreq.sh
 tcsh getfreq.sh
 
-\paste mylist sideband.txt restfreq.txt > mylist2
+echo -n > object.txt
+awk -f getobject.awk mylist > getobject.txt
+cat set_soft.txt getobject.txt > getobject.sh
+tcsh getobject.sh
+
+\paste mylist sideband.txt restfreq.txt object.txt> mylist2
 awk -f namechangeP1.awk mylist2 > namechangeP1.sh
 tcsh namechangeP1.sh
 
-ls a????????_?????_??_reduced????P?.sdf > mylist
+ls a????????_?????_??_???_*_?P?.sdf > mylist
 awk -f wcsattrib.awk mylist > wcsattrib.txt
 cat set_soft.txt wcsattrib.txt > wcsattrib.sh
 tcsh wcsattrib.sh
@@ -63,7 +68,7 @@ awk -f getmsroot.awk mylist > getmsroot.txt
 cat set_soft.txt getmsroot.txt > getmsroot.sh
 tcsh getmsroot.sh
 
-sed -e "s/a//" mylist -e "s/_/ /g" -e "s/reduced...//" -e "s/P/ /" -e "s/.sdf//" > mylist2
+sed -E "s/_[0-9][0-9][0-9]_[0-9A-Z]+_/_/" mylist | sed -e "s/a//" | sed -e "s/_/ /g" | sed -e "s/P/ /" | sed -e "s/.sdf//" > mylist2
 \paste mylist mylist2 restfreq.txt lofreq.txt tsys.txt peakval.txt msbtitle.txt object.txt bwmode.txt msroot.txt > summary.txt
 echo "fname utdate obsnum subsystem sideband pol restfreq LOfreqs LOfreqe tsys peak msbtitle object bwmode msroot" > header.txt
 cat header.txt summary.txt > summary2.txt
