@@ -14,6 +14,7 @@ echo -n > object.txt
 awk -f getobject.awk mylist > getobject.txt
 cat set_soft.txt getobject.txt > getobject.sh
 tcsh getobject.sh
+cat object.txt | sed "s/'//g" > object.txt
 
 \paste mylist sideband.txt restfreq.txt object.txt> mylist2
 awk -f namechangeP1.awk mylist2 > namechangeP1.sh
@@ -57,6 +58,7 @@ echo -n > object.txt
 awk -f getobject.awk mylist > getobject.txt
 cat set_soft.txt getobject.txt > getobject.sh
 tcsh getobject.sh
+cat object.txt | sed "s/'//g" > object.txt
 
 echo -n > bwmode.txt
 awk -f getbwmode.awk mylist > getbwmode.txt
