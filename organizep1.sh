@@ -70,7 +70,7 @@ awk -f getmsroot.awk mylist > getmsroot.txt
 cat set_soft.txt getmsroot.txt > getmsroot.sh
 tcsh getmsroot.sh
 
-sed -E "s/_[0-9][0-9][0-9]_[0-9A-Z]+_/_/" mylist | sed -e "s/a//" | sed -e "s/_/ /g" | sed -e "s/P/ /" | sed -e "s/.sdf//" > mylist2
+sed -E "s/_[0-9][0-9][0-9]_[0-9A-Z-]+_/_/" mylist | sed -e "s/a//" | sed -e "s/_/ /g" | sed -e "s/P/ /" | sed -e "s/.sdf//" > mylist2
 \paste mylist mylist2 restfreq.txt lofreq.txt tsys.txt peakval.txt msbtitle.txt object2.txt bwmode.txt msroot.txt > summary.txt
 echo "fname utdate obsnum subsystem sideband pol restfreq LOfreqs LOfreqe tsys peak msbtitle object bwmode msroot" > header.txt
 cat header.txt summary.txt > summary2.txt
