@@ -14,7 +14,7 @@ echo -n > object.txt
 awk -f getobject.awk mylist > getobject.txt
 cat set_soft.txt getobject.txt > getobject.sh
 tcsh getobject.sh
-cat object.txt | sed "s/'//g" > object2.txt
+cat object.txt | sed "s/'//g" |sed "s/(//g" | sed "s/)//g" > object2.txt
 
 \paste mylist sideband.txt restfreq.txt object2.txt > mylist2
 awk -f namechangeP0.awk mylist2 > namechangeP0.sh
@@ -33,6 +33,11 @@ echo -n > peakval.txt
 awk -f getpeakval.awk mylist > getpeakval.txt
 cat set_soft.txt getpeakval.txt > getpeakval.sh
 tcsh getpeakval.sh
+
+echo -n > peakRF.txt
+awk -f getpeakRF.awk mylist> getpeakRF.txt
+cat set_soft.txt getpeakRF.txt > getpeakRF.sh
+tcsh getpeakRF.sh
 
 echo -n > lofreq.txt
 awk -f getlofreq.awk mylist > getlofreq.txt
@@ -60,7 +65,6 @@ cat set_soft.txt getobject.txt > getobject.sh
 tcsh getobject.sh
 cat object.txt | sed "s/'//g" > object2.txt
 
-
 echo -n > bwmode.txt
 awk -f getbwmode.awk mylist > getbwmode.txt
 cat set_soft.txt getbwmode.txt > getbwmode.sh
@@ -72,7 +76,7 @@ cat set_soft.txt getmsroot.txt > getmsroot.sh
 tcsh getmsroot.sh
 
 sed -E "s/_[0-9][0-9][0-9]_[0-9A-Z-]+_/_/" mylist | sed -e "s/a//" | sed -e "s/_/ /g" | sed -e "s/P/ /" | sed -e "s/.sdf//" > mylist2
-\paste mylist mylist2 restfreq.txt lofreq.txt tsys.txt peakval.txt msbtitle.txt object2.txt bwmode.txt msroot.txt > summary.txt
-echo "fname utdate obsnum subsystem sideband pol restfreq LOfreqs LOfreqe tsys peak msbtitle object bwmode msroot" > header.txt
+\paste mylist mylist2 restfreq.txt lofreq.txt tsys.txt peakval.txt peakRF.txt msbtitle.txt object2.txt bwmode.txt msroot.txt > summary.txt
+echo "fname utdate obsnum subsystem sideband pol restfreq LOfreqs LOfreqe tsys peak peak_RFfreq msbtitle object bwmode msroot" > header.txt
 cat header.txt summary.txt > summary2.txt
 
